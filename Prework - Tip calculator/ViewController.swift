@@ -22,7 +22,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return thank[row]
     }
-    
 
     @IBOutlet weak var billAmountTextField: UITextField!
     @IBOutlet weak var tipAmountLabel: UILabel!
@@ -32,6 +31,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var splittedVal: UILabel!
     @IBOutlet weak var splitNum: UITextField!
     @IBOutlet weak var thankWords: UIPickerView!
+    @IBOutlet weak var modeSwitch: UISwitch!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,6 +39,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         thankWords.delegate = self
         thankWords.dataSource = self
+        billAmountTextField.becomeFirstResponder()
+        
+        let date = UserDefaults.standard.object(forKey: "TerminatedAt") as? Date ?? Date()
+        let timeSince = Calendar.current.dateComponents([.second], from: date, to: Date())
+        let timeAfterTerminate = timeSince.second ?? 0
+        if(timeAfterTerminate <= 600) {
+            let defaults = UserDefaults.standard
+            billAmountTextField.text = defaults.string(forKey: "lastBill")
+        }
     }
 
 
@@ -93,6 +102,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         else {
             thankWords.selectRow(3, inComponent: 0, animated: true)
+        }
+    }
+    
+    @IBAction func rememberBill (_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(billAmountTextField.text, forKey: "lastBill")
+        defaults.synchronize()
+    }
+    
+    @IBAction func darkModeSwitch(_ sender: Any) {
+        if modeSwitch.isOn {
+            overrideUserInterfaceStyle = .dark
+        } else {
+            overrideUserInterfaceStyle = .light
         }
     }
 }
