@@ -34,7 +34,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='private/var/folders/xq/rkvnbc750pl1x0rdv0_25vk40000gn/T/1e4db64933716cde62ca81610b91d933/Kapture 2022-02-03 at 22.23.09.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+*** I tried all plugins to share the gif online and get its URL, all failed. So the gif is uoloaded as a gif file named GIF of Prework ***
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
